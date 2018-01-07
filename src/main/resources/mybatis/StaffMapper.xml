@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dao.StaffMapper" >
+  <resultMap id="BaseResultMap" type="cn.model.Staff" >
+    <id column="staff_id" property="staffId" jdbcType="INTEGER" />
+    <result column="staff_code" property="staffCode" jdbcType="VARCHAR" />
+    <result column="staff_name" property="staffName" jdbcType="VARCHAR" />
+    <result column="pass_word" property="passWord" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="lan_id" property="lanId" jdbcType="INTEGER" />
+    <result column="phone_nbr" property="phoneNbr" jdbcType="VARCHAR" />
+    <result column="staff_type" property="staffType" jdbcType="INTEGER" />
+    <result column="attr_value_1" property="attrValue1" jdbcType="VARCHAR" />
+    <result column="attr_value_2" property="attrValue2" jdbcType="VARCHAR" />
+    <result column="attr_value_3" property="attrValue3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    staff_id, staff_code, staff_name, pass_word, channel_id, sex, age, lan_id, phone_nbr, 
+    staff_type, attr_value_1, attr_value_2, attr_value_3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from staff
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </select>
+    <select id="selectByStaffCode" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from staff
+    where STAFF_CODE=#{staffCode}
+  </select>  
+  
+  <select id="QueryByStaff" resultMap="BaseResultMap"  >
+    	    select 
+			<include refid="Base_Column_List" />
+ 			from staff 
+    	    <where>
+    	        <!-- @Param("keyword") 名称对应 -->
+    	  	    <if test="staffCode!=null">
+    	  	    	and STAFF_CODE = #{staffCode}
+    	  	    </if>  
+    	  	    <if test="staffName!=null">
+    	  	    	and staff_name like #{staffName}
+   	  	    </if>  	
+    	  	    <if test="lanId!=null">
+    	  	    	and lan_id = #{lanId,jdbcType=INTEGER}
+    	  	    </if> 
+    	  	    <if test="staffType!=null">
+    	  	    	and staff_type = #{staffType,jdbcType=INTEGER}
+    	  	    </if> 
+    	  	    
+    	    </where>
+    </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from staff
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.model.Staff" >
+    insert into staff (staff_id, staff_code, staff_name, 
+      pass_word, channel_id, sex, 
+      age, lan_id, phone_nbr, 
+      staff_type, attr_value_1, attr_value_2, 
+      attr_value_3)
+    values (#{staffId,jdbcType=INTEGER}, #{staffCode,jdbcType=VARCHAR}, #{staffName,jdbcType=VARCHAR}, 
+      #{passWord,jdbcType=VARCHAR}, #{channelId,jdbcType=INTEGER}, #{sex,jdbcType=INTEGER}, 
+      #{age,jdbcType=INTEGER}, #{lanId,jdbcType=INTEGER}, #{phoneNbr,jdbcType=VARCHAR}, 
+      #{staffType,jdbcType=INTEGER}, #{attrValue1,jdbcType=VARCHAR}, #{attrValue2,jdbcType=VARCHAR}, 
+      #{attrValue3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.model.Staff" >
+    insert into staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="staffCode != null" >
+        staff_code,
+      </if>
+      <if test="staffName != null" >
+        staff_name,
+      </if>
+      <if test="passWord != null" >
+        pass_word,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="lanId != null" >
+        lan_id,
+      </if>
+      <if test="phoneNbr != null" >
+        phone_nbr,
+      </if>
+      <if test="staffType != null" >
+        staff_type,
+      </if>
+      <if test="attrValue1 != null" >
+        attr_value_1,
+      </if>
+      <if test="attrValue2 != null" >
+        attr_value_2,
+      </if>
+      <if test="attrValue3 != null" >
+        attr_value_3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="staffId != null" >
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="staffCode != null" >
+        #{staffCode,jdbcType=VARCHAR},
+      </if>
+      <if test="staffName != null" >
+        #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null" >
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="lanId != null" >
+        #{lanId,jdbcType=INTEGER},
+      </if>
+      <if test="phoneNbr != null" >
+        #{phoneNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="staffType != null" >
+        #{staffType,jdbcType=INTEGER},
+      </if>
+      <if test="attrValue1 != null" >
+        #{attrValue1,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue2 != null" >
+        #{attrValue2,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue3 != null" >
+        #{attrValue3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.model.Staff" >
+    update staff
+    <set >
+      <if test="staffCode != null" >
+        staff_code = #{staffCode,jdbcType=VARCHAR},
+      </if>
+      <if test="staffName != null" >
+        staff_name = #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null" >
+        pass_word = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="lanId != null" >
+        lan_id = #{lanId,jdbcType=INTEGER},
+      </if>
+      <if test="phoneNbr != null" >
+        phone_nbr = #{phoneNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="staffType != null" >
+        staff_type = #{staffType,jdbcType=INTEGER},
+      </if>
+      <if test="attrValue1 != null" >
+        attr_value_1 = #{attrValue1,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue2 != null" >
+        attr_value_2 = #{attrValue2,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue3 != null" >
+        attr_value_3 = #{attrValue3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.model.Staff" >
+    update staff
+    set staff_code = #{staffCode,jdbcType=VARCHAR},
+      staff_name = #{staffName,jdbcType=VARCHAR},
+      pass_word = #{passWord,jdbcType=VARCHAR},
+      channel_id = #{channelId,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=INTEGER},
+      age = #{age,jdbcType=INTEGER},
+      lan_id = #{lanId,jdbcType=INTEGER},
+      phone_nbr = #{phoneNbr,jdbcType=VARCHAR},
+      staff_type = #{staffType,jdbcType=INTEGER},
+      attr_value_1 = #{attrValue1,jdbcType=VARCHAR},
+      attr_value_2 = #{attrValue2,jdbcType=VARCHAR},
+      attr_value_3 = #{attrValue3,jdbcType=VARCHAR}
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </update>
+</mapper>

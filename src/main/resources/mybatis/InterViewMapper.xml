@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dao.InterViewMapper">
+
+    <resultMap id="InterViewMapper" type="cn.view.InterView">
+
+        <result property="staff_id" column="STAFF_ID"/>
+        <result property="staff_name" column="STAFF_NAME"/>
+        <result property="gold" column="GOLD"/>
+    </resultMap>
+
+
+    <sql id="all_fields">
+        STAFF_NAME,GOLD
+    </sql>
+
+    <select id="findViewById" parameterType="java.util.Map" resultMap="InterViewMapper">
+        SELECT STAFF_ID,
+        <include refid="all_fields"/>
+        FROM InterView
+        where STAFF_ID=#{staff_id}
+    </select>
+
+</mapper>

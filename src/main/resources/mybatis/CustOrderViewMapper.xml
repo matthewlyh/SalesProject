@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2014-2016 abel533@gmail.com
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dao.CustOrderViewMapper">
+
+    <resultMap id="CustOrderViewMapper" type="cn.view.CustOrderView">
+        <result property="cust_order_id" column="CUST_ORDER_ID"/>
+        <result property="cust_order_date" column="CUST_ORDER_DATE"/>
+        <result property="prod_offer_name" column="PROD_OFFER_NAME"/>
+        <result property="product_name" column="PRODUCT_NAME"/>
+        <result property="gold" column="GOLD"/>
+    </resultMap>
+
+    <sql id="all_fields">
+        CUST_ORDER_DATE,PROD_OFFER_NAME,PRODUCT_NAME,GOLD
+    </sql>
+
+	<select id="QueryByCustOrderView" resultMap="CustOrderViewMapper"  >
+    	    SELECT cust_order_id,
+        <include refid="all_fields"/>
+        FROM CustOrderView
+    	    <where>
+    	        <!-- @Param("keyword") 名称对应 -->
+    	  <if test="cust_order_id != 0">AND CUST_ORDER_ID=#{cust_order_id}</if>
+          <if test="cust_order_date != null">AND CUST_ORDER_DATE like CONCAT('%',#{cust_order_date}, '%') </if>
+          <if test="prod_offer_name != null">AND PROD_OFFER_NAME = #{prod_offer_name}</if>
+
+    	  	    
+    	    </where>
+    </select>
+
+</mapper>

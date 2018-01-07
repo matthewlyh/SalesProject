@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dao.LanMapper" >
+  <resultMap id="BaseResultMap" type="cn.model.Lan" >
+    <id column="lan_id" property="lanId" jdbcType="INTEGER" />
+    <result column="lan_name" property="lanName" jdbcType="VARCHAR" />
+    <result column="attr_value_1" property="attrValue1" jdbcType="VARCHAR" />
+    <result column="attr_value_2" property="attrValue2" jdbcType="VARCHAR" />
+    <result column="attr_value_3" property="attrValue3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    lan_id, lan_name, attr_value_1, attr_value_2, attr_value_3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from lan
+    where lan_id = #{lanId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from lan
+    where lan_id = #{lanId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.model.Lan" >
+    insert into lan (lan_id, lan_name, attr_value_1, 
+      attr_value_2, attr_value_3)
+    values (#{lanId,jdbcType=INTEGER}, #{lanName,jdbcType=VARCHAR}, #{attrValue1,jdbcType=VARCHAR}, 
+      #{attrValue2,jdbcType=VARCHAR}, #{attrValue3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.model.Lan" >
+    insert into lan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lanId != null" >
+        lan_id,
+      </if>
+      <if test="lanName != null" >
+        lan_name,
+      </if>
+      <if test="attrValue1 != null" >
+        attr_value_1,
+      </if>
+      <if test="attrValue2 != null" >
+        attr_value_2,
+      </if>
+      <if test="attrValue3 != null" >
+        attr_value_3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lanId != null" >
+        #{lanId,jdbcType=INTEGER},
+      </if>
+      <if test="lanName != null" >
+        #{lanName,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue1 != null" >
+        #{attrValue1,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue2 != null" >
+        #{attrValue2,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue3 != null" >
+        #{attrValue3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.model.Lan" >
+    update lan
+    <set >
+      <if test="lanName != null" >
+        lan_name = #{lanName,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue1 != null" >
+        attr_value_1 = #{attrValue1,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue2 != null" >
+        attr_value_2 = #{attrValue2,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue3 != null" >
+        attr_value_3 = #{attrValue3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where lan_id = #{lanId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.model.Lan" >
+    update lan
+    set lan_name = #{lanName,jdbcType=VARCHAR},
+      attr_value_1 = #{attrValue1,jdbcType=VARCHAR},
+      attr_value_2 = #{attrValue2,jdbcType=VARCHAR},
+      attr_value_3 = #{attrValue3,jdbcType=VARCHAR}
+    where lan_id = #{lanId,jdbcType=INTEGER}
+  </update>
+</mapper>

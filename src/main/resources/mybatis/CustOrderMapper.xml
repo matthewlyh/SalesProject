@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dao.CustOrderMapper" >
+  <resultMap id="BaseResultMap" type="cn.model.CustOrder" >
+    <id column="cust_order_id" property="custOrderId" jdbcType="INTEGER" />
+    <result column="staff_id" property="staffId" jdbcType="INTEGER" />
+    <result column="cust_order_date" property="custOrderDate" jdbcType="TIMESTAMP" />
+    <result column="channel_id" property="channelId" jdbcType="INTEGER" />
+    <result column="prod_offer_id" property="prodOfferId" jdbcType="INTEGER" />
+    <result column="lan_id" property="lanId" jdbcType="INTEGER" />
+    <result column="status_cd" property="statusCd" jdbcType="INTEGER" />
+    <result column="attr_value_1" property="attrValue1" jdbcType="VARCHAR" />
+    <result column="attr_value_2" property="attrValue2" jdbcType="VARCHAR" />
+    <result column="attr_value_3" property="attrValue3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cust_order_id, staff_id, cust_order_date, channel_id, prod_offer_id, lan_id, status_cd, 
+    attr_value_1, attr_value_2, attr_value_3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cust_order
+    where cust_order_id = #{custOrderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cust_order
+    where cust_order_id = #{custOrderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.model.CustOrder" >
+    insert into cust_order (cust_order_id, staff_id, cust_order_date, 
+      channel_id, prod_offer_id, lan_id, 
+      status_cd, attr_value_1, attr_value_2, 
+      attr_value_3)
+    values (#{custOrderId,jdbcType=INTEGER}, #{staffId,jdbcType=INTEGER}, #{custOrderDate,jdbcType=TIMESTAMP}, 
+      #{channelId,jdbcType=INTEGER}, #{prodOfferId,jdbcType=INTEGER}, #{lanId,jdbcType=INTEGER}, 
+      #{statusCd,jdbcType=INTEGER}, #{attrValue1,jdbcType=VARCHAR}, #{attrValue2,jdbcType=VARCHAR}, 
+      #{attrValue3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.model.CustOrder" >
+    insert into cust_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="custOrderId != null" >
+        cust_order_id,
+      </if>
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="custOrderDate != null" >
+        cust_order_date,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="prodOfferId != null" >
+        prod_offer_id,
+      </if>
+      <if test="lanId != null" >
+        lan_id,
+      </if>
+      <if test="statusCd != null" >
+        status_cd,
+      </if>
+      <if test="attrValue1 != null" >
+        attr_value_1,
+      </if>
+      <if test="attrValue2 != null" >
+        attr_value_2,
+      </if>
+      <if test="attrValue3 != null" >
+        attr_value_3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="custOrderId != null" >
+        #{custOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="custOrderDate != null" >
+        #{custOrderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="prodOfferId != null" >
+        #{prodOfferId,jdbcType=INTEGER},
+      </if>
+      <if test="lanId != null" >
+        #{lanId,jdbcType=INTEGER},
+      </if>
+      <if test="statusCd != null" >
+        #{statusCd,jdbcType=INTEGER},
+      </if>
+      <if test="attrValue1 != null" >
+        #{attrValue1,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue2 != null" >
+        #{attrValue2,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue3 != null" >
+        #{attrValue3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.model.CustOrder" >
+    update cust_order
+    <set >
+      <if test="staffId != null" >
+        staff_id = #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="custOrderDate != null" >
+        cust_order_date = #{custOrderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="prodOfferId != null" >
+        prod_offer_id = #{prodOfferId,jdbcType=INTEGER},
+      </if>
+      <if test="lanId != null" >
+        lan_id = #{lanId,jdbcType=INTEGER},
+      </if>
+      <if test="statusCd != null" >
+        status_cd = #{statusCd,jdbcType=INTEGER},
+      </if>
+      <if test="attrValue1 != null" >
+        attr_value_1 = #{attrValue1,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue2 != null" >
+        attr_value_2 = #{attrValue2,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue3 != null" >
+        attr_value_3 = #{attrValue3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cust_order_id = #{custOrderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.model.CustOrder" >
+    update cust_order
+    set staff_id = #{staffId,jdbcType=INTEGER},
+      cust_order_date = #{custOrderDate,jdbcType=TIMESTAMP},
+      channel_id = #{channelId,jdbcType=INTEGER},
+      prod_offer_id = #{prodOfferId,jdbcType=INTEGER},
+      lan_id = #{lanId,jdbcType=INTEGER},
+      status_cd = #{statusCd,jdbcType=INTEGER},
+      attr_value_1 = #{attrValue1,jdbcType=VARCHAR},
+      attr_value_2 = #{attrValue2,jdbcType=VARCHAR},
+      attr_value_3 = #{attrValue3,jdbcType=VARCHAR}
+    where cust_order_id = #{custOrderId,jdbcType=INTEGER}
+  </update>
+</mapper>

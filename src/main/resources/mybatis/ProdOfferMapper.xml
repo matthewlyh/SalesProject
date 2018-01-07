@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dao.ProdOfferMapper" >
+  <resultMap id="BaseResultMap" type="cn.model.ProdOffer" >
+    <id column="prod_offer_id" property="prodOfferId" jdbcType="INTEGER" />
+    <result column="prod_offer_name" property="prodOfferName" jdbcType="VARCHAR" />
+    <result column="offer_type" property="offerType" jdbcType="INTEGER" />
+    <result column="status_cd" property="statusCd" jdbcType="INTEGER" />
+    <result column="status_date" property="statusDate" jdbcType="TIMESTAMP" />
+    <result column="gold" property="gold" jdbcType="REAL" />
+    <result column="attr_value_1" property="attrValue1" jdbcType="VARCHAR" />
+    <result column="attr_value_2" property="attrValue2" jdbcType="VARCHAR" />
+    <result column="attr_value_3" property="attrValue3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    prod_offer_id, prod_offer_name, offer_type, status_cd, status_date, gold, attr_value_1, 
+    attr_value_2, attr_value_3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from prod_offer
+    where prod_offer_id = #{prodOfferId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from prod_offer
+    where prod_offer_id = #{prodOfferId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.model.ProdOffer" >
+    insert into prod_offer (prod_offer_id, prod_offer_name, offer_type, 
+      status_cd, status_date, gold, 
+      attr_value_1, attr_value_2, attr_value_3
+      )
+    values (#{prodOfferId,jdbcType=INTEGER}, #{prodOfferName,jdbcType=VARCHAR}, #{offerType,jdbcType=INTEGER}, 
+      #{statusCd,jdbcType=INTEGER}, #{statusDate,jdbcType=TIMESTAMP}, #{gold,jdbcType=REAL}, 
+      #{attrValue1,jdbcType=VARCHAR}, #{attrValue2,jdbcType=VARCHAR}, #{attrValue3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.model.ProdOffer" >
+    insert into prod_offer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="prodOfferId != null" >
+        prod_offer_id,
+      </if>
+      <if test="prodOfferName != null" >
+        prod_offer_name,
+      </if>
+      <if test="offerType != null" >
+        offer_type,
+      </if>
+      <if test="statusCd != null" >
+        status_cd,
+      </if>
+      <if test="statusDate != null" >
+        status_date,
+      </if>
+      <if test="gold != null" >
+        gold,
+      </if>
+      <if test="attrValue1 != null" >
+        attr_value_1,
+      </if>
+      <if test="attrValue2 != null" >
+        attr_value_2,
+      </if>
+      <if test="attrValue3 != null" >
+        attr_value_3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="prodOfferId != null" >
+        #{prodOfferId,jdbcType=INTEGER},
+      </if>
+      <if test="prodOfferName != null" >
+        #{prodOfferName,jdbcType=VARCHAR},
+      </if>
+      <if test="offerType != null" >
+        #{offerType,jdbcType=INTEGER},
+      </if>
+      <if test="statusCd != null" >
+        #{statusCd,jdbcType=INTEGER},
+      </if>
+      <if test="statusDate != null" >
+        #{statusDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gold != null" >
+        #{gold,jdbcType=REAL},
+      </if>
+      <if test="attrValue1 != null" >
+        #{attrValue1,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue2 != null" >
+        #{attrValue2,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue3 != null" >
+        #{attrValue3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.model.ProdOffer" >
+    update prod_offer
+    <set >
+      <if test="prodOfferName != null" >
+        prod_offer_name = #{prodOfferName,jdbcType=VARCHAR},
+      </if>
+      <if test="offerType != null" >
+        offer_type = #{offerType,jdbcType=INTEGER},
+      </if>
+      <if test="statusCd != null" >
+        status_cd = #{statusCd,jdbcType=INTEGER},
+      </if>
+      <if test="statusDate != null" >
+        status_date = #{statusDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gold != null" >
+        gold = #{gold,jdbcType=REAL},
+      </if>
+      <if test="attrValue1 != null" >
+        attr_value_1 = #{attrValue1,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue2 != null" >
+        attr_value_2 = #{attrValue2,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue3 != null" >
+        attr_value_3 = #{attrValue3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where prod_offer_id = #{prodOfferId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.model.ProdOffer" >
+    update prod_offer
+    set prod_offer_name = #{prodOfferName,jdbcType=VARCHAR},
+      offer_type = #{offerType,jdbcType=INTEGER},
+      status_cd = #{statusCd,jdbcType=INTEGER},
+      status_date = #{statusDate,jdbcType=TIMESTAMP},
+      gold = #{gold,jdbcType=REAL},
+      attr_value_1 = #{attrValue1,jdbcType=VARCHAR},
+      attr_value_2 = #{attrValue2,jdbcType=VARCHAR},
+      attr_value_3 = #{attrValue3,jdbcType=VARCHAR}
+    where prod_offer_id = #{prodOfferId,jdbcType=INTEGER}
+  </update>
+</mapper>

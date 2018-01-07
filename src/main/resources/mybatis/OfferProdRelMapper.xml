@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dao.OfferProdRelMapper" >
+  <resultMap id="BaseResultMap" type="cn.model.OfferProdRel" >
+    <id column="offer_prod_rel_id" property="offerProdRelId" jdbcType="INTEGER" />
+    <result column="prod_offer_id" property="prodOfferId" jdbcType="INTEGER" />
+    <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="attr_value_1" property="attrValue1" jdbcType="VARCHAR" />
+    <result column="attr_value_2" property="attrValue2" jdbcType="VARCHAR" />
+    <result column="attr_value_3" property="attrValue3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    offer_prod_rel_id, prod_offer_id, product_id, attr_value_1, attr_value_2, attr_value_3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from offer_prod_rel
+    where offer_prod_rel_id = #{offerProdRelId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from offer_prod_rel
+    where offer_prod_rel_id = #{offerProdRelId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.model.OfferProdRel" >
+    insert into offer_prod_rel (offer_prod_rel_id, prod_offer_id, product_id, 
+      attr_value_1, attr_value_2, attr_value_3
+      )
+    values (#{offerProdRelId,jdbcType=INTEGER}, #{prodOfferId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, 
+      #{attrValue1,jdbcType=VARCHAR}, #{attrValue2,jdbcType=VARCHAR}, #{attrValue3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.model.OfferProdRel" >
+    insert into offer_prod_rel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="offerProdRelId != null" >
+        offer_prod_rel_id,
+      </if>
+      <if test="prodOfferId != null" >
+        prod_offer_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="attrValue1 != null" >
+        attr_value_1,
+      </if>
+      <if test="attrValue2 != null" >
+        attr_value_2,
+      </if>
+      <if test="attrValue3 != null" >
+        attr_value_3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="offerProdRelId != null" >
+        #{offerProdRelId,jdbcType=INTEGER},
+      </if>
+      <if test="prodOfferId != null" >
+        #{prodOfferId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="attrValue1 != null" >
+        #{attrValue1,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue2 != null" >
+        #{attrValue2,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue3 != null" >
+        #{attrValue3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.model.OfferProdRel" >
+    update offer_prod_rel
+    <set >
+      <if test="prodOfferId != null" >
+        prod_offer_id = #{prodOfferId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="attrValue1 != null" >
+        attr_value_1 = #{attrValue1,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue2 != null" >
+        attr_value_2 = #{attrValue2,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue3 != null" >
+        attr_value_3 = #{attrValue3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where offer_prod_rel_id = #{offerProdRelId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.model.OfferProdRel" >
+    update offer_prod_rel
+    set prod_offer_id = #{prodOfferId,jdbcType=INTEGER},
+      product_id = #{productId,jdbcType=INTEGER},
+      attr_value_1 = #{attrValue1,jdbcType=VARCHAR},
+      attr_value_2 = #{attrValue2,jdbcType=VARCHAR},
+      attr_value_3 = #{attrValue3,jdbcType=VARCHAR}
+    where offer_prod_rel_id = #{offerProdRelId,jdbcType=INTEGER}
+  </update>
+</mapper>

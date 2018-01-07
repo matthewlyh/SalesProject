@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dao.GoldMapper" >
+  <resultMap id="BaseResultMap" type="cn.model.Gold" >
+    <id column="gold_id" property="goldId" jdbcType="INTEGER" />
+    <result column="staff_id" property="staffId" jdbcType="INTEGER" />
+    <result column="prod_offer_id" property="prodOfferId" jdbcType="INTEGER" />
+    <result column="channel_id" property="channelId" jdbcType="INTEGER" />
+    <result column="lan_id" property="lanId" jdbcType="INTEGER" />
+    <result column="cust_order_id" property="custOrderId" jdbcType="INTEGER" />
+    <result column="gold" property="gold" jdbcType="REAL" />
+    <result column="attr_value_1" property="attrValue1" jdbcType="VARCHAR" />
+    <result column="attr_value_2" property="attrValue2" jdbcType="VARCHAR" />
+    <result column="attr_value_3" property="attrValue3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    gold_id, staff_id, prod_offer_id, channel_id, lan_id, cust_order_id, gold, attr_value_1, 
+    attr_value_2, attr_value_3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gold
+    where gold_id = #{goldId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gold
+    where gold_id = #{goldId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.model.Gold" >
+    insert into gold (gold_id, staff_id, prod_offer_id, 
+      channel_id, lan_id, cust_order_id, 
+      gold, attr_value_1, attr_value_2, 
+      attr_value_3)
+    values (#{goldId,jdbcType=INTEGER}, #{staffId,jdbcType=INTEGER}, #{prodOfferId,jdbcType=INTEGER}, 
+      #{channelId,jdbcType=INTEGER}, #{lanId,jdbcType=INTEGER}, #{custOrderId,jdbcType=INTEGER}, 
+      #{gold,jdbcType=REAL}, #{attrValue1,jdbcType=VARCHAR}, #{attrValue2,jdbcType=VARCHAR}, 
+      #{attrValue3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.model.Gold" >
+    insert into gold
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goldId != null" >
+        gold_id,
+      </if>
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="prodOfferId != null" >
+        prod_offer_id,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="lanId != null" >
+        lan_id,
+      </if>
+      <if test="custOrderId != null" >
+        cust_order_id,
+      </if>
+      <if test="gold != null" >
+        gold,
+      </if>
+      <if test="attrValue1 != null" >
+        attr_value_1,
+      </if>
+      <if test="attrValue2 != null" >
+        attr_value_2,
+      </if>
+      <if test="attrValue3 != null" >
+        attr_value_3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goldId != null" >
+        #{goldId,jdbcType=INTEGER},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="prodOfferId != null" >
+        #{prodOfferId,jdbcType=INTEGER},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="lanId != null" >
+        #{lanId,jdbcType=INTEGER},
+      </if>
+      <if test="custOrderId != null" >
+        #{custOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="gold != null" >
+        #{gold,jdbcType=REAL},
+      </if>
+      <if test="attrValue1 != null" >
+        #{attrValue1,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue2 != null" >
+        #{attrValue2,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue3 != null" >
+        #{attrValue3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.model.Gold" >
+    update gold
+    <set >
+      <if test="staffId != null" >
+        staff_id = #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="prodOfferId != null" >
+        prod_offer_id = #{prodOfferId,jdbcType=INTEGER},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="lanId != null" >
+        lan_id = #{lanId,jdbcType=INTEGER},
+      </if>
+      <if test="custOrderId != null" >
+        cust_order_id = #{custOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="gold != null" >
+        gold = #{gold,jdbcType=REAL},
+      </if>
+      <if test="attrValue1 != null" >
+        attr_value_1 = #{attrValue1,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue2 != null" >
+        attr_value_2 = #{attrValue2,jdbcType=VARCHAR},
+      </if>
+      <if test="attrValue3 != null" >
+        attr_value_3 = #{attrValue3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where gold_id = #{goldId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.model.Gold" >
+    update gold
+    set staff_id = #{staffId,jdbcType=INTEGER},
+      prod_offer_id = #{prodOfferId,jdbcType=INTEGER},
+      channel_id = #{channelId,jdbcType=INTEGER},
+      lan_id = #{lanId,jdbcType=INTEGER},
+      cust_order_id = #{custOrderId,jdbcType=INTEGER},
+      gold = #{gold,jdbcType=REAL},
+      attr_value_1 = #{attrValue1,jdbcType=VARCHAR},
+      attr_value_2 = #{attrValue2,jdbcType=VARCHAR},
+      attr_value_3 = #{attrValue3,jdbcType=VARCHAR}
+    where gold_id = #{goldId,jdbcType=INTEGER}
+  </update>
+</mapper>
