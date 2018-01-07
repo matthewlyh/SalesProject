@@ -3,9 +3,20 @@ package cn.view;
 public class CustOrderView {
     private int cust_order_id;
     private String  cust_order_date;
+    private String staff_name;
     private String prod_offer_name;
     private String product_name;
     private float gold;
+    
+    
+    
+    
+	public String getStaff_name() {
+		return staff_name;
+	}
+	public void setStaff_name(String staff_name) {
+		this.staff_name = staff_name;
+	}
 	public int getCust_order_id() {
 		return cust_order_id;
 	}

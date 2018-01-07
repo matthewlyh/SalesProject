@@ -1,6 +1,6 @@
-package cn.list;
+package cn.query;
 
-public class StaffList {
+public class StaffQuery {
     private String staff_code;
     private String staff_name;
     private int sex;
@@ -9,8 +9,18 @@ public class StaffList {
     private String channel_name;
     private int Type;
     private float Gold;
+    private int Sank;
     
-    public float getGold() {
+    
+    public int getSank() {
+		return Sank;
+	}
+
+	public void setSank(int sank) {
+		Sank = sank;
+	}
+
+	public float getGold() {
 		return Gold;
 	}
 

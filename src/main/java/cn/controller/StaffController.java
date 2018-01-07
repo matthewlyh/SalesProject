@@ -1,10 +1,10 @@
 package cn.controller;
 
-import cn.list.StaffList;
 import cn.model.BooleanT;
 import cn.model.Channel;
 import cn.model.Lan;
 import cn.model.Staff;
+import cn.query.StaffQuery;
 import cn.util.MD5Utils;
 import cn.view.InterView;
 
@@ -64,10 +64,10 @@ public class StaffController extends BaseController{
     @RequestMapping("/LoginIn")
     @ResponseBody
     @CrossOrigin
-    public StaffList LoginIn(HttpServletRequest request) {
+    public StaffQuery LoginIn(HttpServletRequest request) {
         System.out.println("--------------------------------");
         System.out.println("StaffController：LoginIn");
-        StaffList list=new StaffList();
+        StaffQuery query=new StaffQuery();
         Object Sid= request.getParameter("id");
         //System.out.println("ID:"+Sid);
         if (Sid != null) {
@@ -79,14 +79,20 @@ public class StaffController extends BaseController{
 	            Channel cm=channelService.FindChannelById(sm.getChannelId());
 	            Lan lm=lanService.FindLanByID(sm.getLanId());
 	            InterView interView=interViewService.findInterViewById(sm.getStaffId());
-	            list.setStaff_code(sm.getStaffCode());
-	            list.setStaff_name(sm.getStaffName());
-	            list.setSex(sm.getSex());
-	            list.setLan_name(lm.getLanName());
-	            list.setPhone_nbr(sm.getPhoneNbr());
-	            list.setChannel_name(cm.getChannelName());
-	            list.setGold(interView.getGold());
-	            return list;
+	            query.setStaff_code(sm.getStaffCode());
+	            query.setStaff_name(sm.getStaffName());
+	            query.setSex(sm.getSex());
+	            query.setLan_name(lm.getLanName());
+	            query.setPhone_nbr(sm.getPhoneNbr());
+	            query.setChannel_name(cm.getChannelName());
+	            query.setGold(interView.getGold());
+	            List<InterView> list=interViewService.query();
+	            int Sank=1;
+	            for(int i=0;i<list.size();i++)
+	                if (list.get(i).getGold()>interView.getGold())
+	                    Sank=Sank+1;
+	            query.setSank(Sank);
+	            return query;
             }
             else {
             	System.out.println("ID:"+id+"用户不存在");
@@ -203,8 +209,8 @@ public class StaffController extends BaseController{
     }
     
     /*用户搜索功能
-     * 入参：
-     * 
+     * 入参：staff_code、Staff_name、lan_id、staff_type
+     * 出参：根据判断条件搜索出符合的用户
      * 
      * 
      * */

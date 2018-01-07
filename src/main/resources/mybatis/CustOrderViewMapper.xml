@@ -47,6 +47,7 @@
     	  <if test="cust_order_id != 0">AND CUST_ORDER_ID=#{cust_order_id}</if>
           <if test="cust_order_date != null">AND CUST_ORDER_DATE like CONCAT('%',#{cust_order_date}, '%') </if>
           <if test="prod_offer_name != null">AND PROD_OFFER_NAME = #{prod_offer_name}</if>
+           <if test="product_name != null">AND PRODUCT_NAME = #{product_name}</if>
 
     	  	    
     	    </where>

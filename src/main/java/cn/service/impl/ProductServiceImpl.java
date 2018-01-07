@@ -19,4 +19,9 @@ public class ProductServiceImpl implements ProductService {
 		return productMapper.selectByPrimaryKey(productId);
 	}
 
+	public Product selectByProductName(String productName) {
+		// TODO 自动生成的方法存根
+		return productMapper.selectByProductName(productName);
+	}
+
 }

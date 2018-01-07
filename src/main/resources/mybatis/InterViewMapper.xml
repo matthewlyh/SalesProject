@@ -22,4 +22,10 @@
         where STAFF_ID=#{staff_id}
     </select>
 
+  <select id="queryList" resultMap="InterViewMapper">
+        SELECT *
+        FROM InterView
+    </select>
+
+
 </mapper>

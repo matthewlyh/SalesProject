@@ -10,6 +10,8 @@ public interface ProductMapper {
     int insertSelective(Product record);
 
     Product selectByPrimaryKey(Integer productId);
+    
+    Product selectByProductName(String productName);
 
     int updateByPrimaryKeySelective(Product record);
 
