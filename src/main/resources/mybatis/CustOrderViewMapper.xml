@@ -30,12 +30,13 @@
         <result property="cust_order_id" column="CUST_ORDER_ID"/>
         <result property="cust_order_date" column="CUST_ORDER_DATE"/>
         <result property="prod_offer_name" column="PROD_OFFER_NAME"/>
+        <result property="staff_name" column="STAFF_NAME"/>
         <result property="product_name" column="PRODUCT_NAME"/>
         <result property="gold" column="GOLD"/>
     </resultMap>
 
     <sql id="all_fields">
-        CUST_ORDER_DATE,PROD_OFFER_NAME,PRODUCT_NAME,GOLD
+        CUST_ORDER_DATE,PROD_OFFER_NAME,PRODUCT_NAME,GOLD,STAFF_NAME
     </sql>
 
 	<select id="QueryByCustOrderView" resultMap="CustOrderViewMapper"  >

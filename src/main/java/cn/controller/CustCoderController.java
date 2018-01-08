@@ -5,9 +5,7 @@ import java.util.List;
 
 import cn.model.CustOrder;
 import cn.model.ProdOffer;
-import cn.model.Product;
 import cn.query.CustOrderQuery;
-import cn.service.CustOrderViewService;
 import cn.view.CustOrderView;
 
 import org.springframework.stereotype.Controller;
