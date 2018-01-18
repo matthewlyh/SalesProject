@@ -1,9 +1,9 @@
-package cn.query;
+package cn.list;
 
 /**
  * Created by Administrator on 2017/10/26.
  */
-public class CustOrderQuery {
+public class CustOrderList {
     private int cust_order_id;
     private int  prod_offer_id;
     private String prod_offer_name;

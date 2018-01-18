@@ -2,6 +2,8 @@ package cn.service;
 import java.util.List;
 
 import cn.model.Staff;
+import cn.query.PagedData;
+import cn.query.StaffQuery;
 
 /**
  * Created by Administrator on 2017/10/25.
@@ -13,4 +15,5 @@ public interface StaffService {
 	int UpdatePassWord(int id ,String OldPWD,String NewPWD);
 	int updateByPrimaryKey(Staff staff);
 	public List<Staff> QueryByStaff(Staff record);
+	public PagedData<Staff> query(StaffQuery query);
 }

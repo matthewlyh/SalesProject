@@ -33,6 +33,52 @@
     where STAFF_CODE=#{staffCode}
   </select>  
   
+    <select id="PageByStaffQuery" parameterType="cn.query.StaffQuery" resultMap="BaseResultMap"  >
+    	    select 
+			<include refid="Base_Column_List" />
+ 			from staff 
+    	    <where>
+    	        <!-- @Param("keyword") 名称对应 -->
+    	  	    <if test="staffCode!=null">
+    	  	    	and STAFF_CODE = #{staffCode}
+    	  	    </if>  
+    	  	    <if test="staffName!=null">
+    	  	    	and staff_name like #{staffName}
+   	  	    </if>  	
+    	  	    <if test="lanId!=null">
+    	  	    	and lan_id = #{lanId,jdbcType=INTEGER}
+    	  	    </if> 
+    	  	    <if test="staffType!=null">
+    	  	    	and staff_type = #{staffType,jdbcType=INTEGER}
+    	  	    </if> 
+    	  	    
+    	    </where>
+    	    
+    	    ORDER BY staff_id
+        	limit #{startRow}, #{pageSize}
+    </select>
+  
+    <select id="CountByStaffQuery" parameterType="cn.query.StaffQuery" resultType="Integer" >
+    	    select count(1)
+ 			from staff 
+    	    <where>
+    	        <!-- @Param("keyword") 名称对应 -->
+    	  	    <if test="staffCode!=null">
+    	  	    	and STAFF_CODE = #{staffCode}
+    	  	    </if>  
+    	  	    <if test="staffName!=null">
+    	  	    	and staff_name like #{staffName}
+   	  	    </if>  	
+    	  	    <if test="lanId!=null">
+    	  	    	and lan_id = #{lanId,jdbcType=INTEGER}
+    	  	    </if> 
+    	  	    <if test="staffType!=null">
+    	  	    	and staff_type = #{staffType,jdbcType=INTEGER}
+    	  	    </if> 
+    	  	    
+    	    </where>
+    </select>  
+  
   <select id="QueryByStaff" resultMap="BaseResultMap"  >
     	    select 
 			<include refid="Base_Column_List" />

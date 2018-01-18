@@ -3,9 +3,9 @@ package cn.controller;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import cn.list.CustOrderList;
 import cn.model.CustOrder;
 import cn.model.ProdOffer;
-import cn.query.CustOrderQuery;
 import cn.view.CustOrderView;
 
 import org.springframework.stereotype.Controller;
@@ -28,11 +28,11 @@ public class CustCoderController extends BaseController{
     @RequestMapping("/FindCustId")
     @ResponseBody
     @CrossOrigin
-    public CustOrderQuery FindCustId(HttpServletRequest request) {
+    public CustOrderList FindCustId(HttpServletRequest request) {
     	System.out.println("--------------------------------");
         System.out.println("启动程序CustCoderController：FindCustId");
         Object CustOrderId = request.getParameter("id");
-        CustOrderQuery custOrderQuery=new CustOrderQuery();
+        CustOrderList custOrderQuery=new CustOrderList();
         if (CustOrderId !=null)
         {
 	        CustOrder custOrder=custOrderService.FindCustOrderByID(Integer.valueOf(CustOrderId.toString()));

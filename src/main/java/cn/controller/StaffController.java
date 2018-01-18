@@ -1,9 +1,11 @@
 package cn.controller;
 
+import cn.list.StaffList;
 import cn.model.BooleanT;
 import cn.model.Channel;
 import cn.model.Lan;
 import cn.model.Staff;
+import cn.query.PagedData;
 import cn.query.StaffQuery;
 import cn.util.MD5Utils;
 import cn.view.InterView;
@@ -64,10 +66,10 @@ public class StaffController extends BaseController{
     @RequestMapping("/LoginIn")
     @ResponseBody
     @CrossOrigin
-    public StaffQuery LoginIn(HttpServletRequest request) {
+    public StaffList LoginIn(HttpServletRequest request) {
         System.out.println("--------------------------------");
         System.out.println("StaffController：LoginIn");
-        StaffQuery query=new StaffQuery();
+        StaffList List=new StaffList();
         Object Sid= request.getParameter("id");
         //System.out.println("ID:"+Sid);
         if (Sid != null) {
@@ -79,20 +81,20 @@ public class StaffController extends BaseController{
 	            Channel cm=channelService.FindChannelById(sm.getChannelId());
 	            Lan lm=lanService.FindLanByID(sm.getLanId());
 	            InterView interView=interViewService.findInterViewById(sm.getStaffId());
-	            query.setStaff_code(sm.getStaffCode());
-	            query.setStaff_name(sm.getStaffName());
-	            query.setSex(sm.getSex());
-	            query.setLan_name(lm.getLanName());
-	            query.setPhone_nbr(sm.getPhoneNbr());
-	            query.setChannel_name(cm.getChannelName());
-	            query.setGold(interView.getGold());
+	            List.setStaff_code(sm.getStaffCode());
+	            List.setStaff_name(sm.getStaffName());
+	            List.setSex(sm.getSex());
+	            List.setLan_name(lm.getLanName());
+	            List.setPhone_nbr(sm.getPhoneNbr());
+	            List.setChannel_name(cm.getChannelName());
+	            List.setGold(interView.getGold());
 	            List<InterView> list=interViewService.query();
 	            int Sank=1;
 	            for(int i=0;i<list.size();i++)
 	                if (list.get(i).getGold()>interView.getGold())
 	                    Sank=Sank+1;
-	            query.setSank(Sank);
-	            return query;
+	            List.setSank(Sank);
+	            return List;
             }
             else {
             	System.out.println("ID:"+id+"用户不存在");
@@ -217,7 +219,7 @@ public class StaffController extends BaseController{
     @RequestMapping("/StaffList")
     @ResponseBody
     @CrossOrigin
-    public List<Staff> queryList(HttpServletRequest request) {
+    public List<Staff> StaffList(HttpServletRequest request) {
     	System.out.println("--------------------------------");
         System.out.println("StaffController：StaffList");
         Object staff_code = request.getParameter("staff_code");
@@ -242,6 +244,44 @@ public class StaffController extends BaseController{
   //      query.setLan_id(Integer.valueOf(lan_id));
        
         return staffService.QueryByStaff(staff);
+    }
+    
+    @RequestMapping("/StaffPage")
+    @ResponseBody
+    @CrossOrigin
+    public PagedData<Staff> StaffPage(HttpServletRequest request) {
+    	System.out.println("--------------------------------");
+        System.out.println("StaffController：StaffPage");
+        Object staff_code = request.getParameter("staff_code");
+        Object Staff_name = request.getParameter("Staff_name");
+        Object lan_id = request.getParameter("lan_id");
+        Object staff_type = request.getParameter("staff_type");
+        Object pageNum = request.getParameter("pageNum");
+        Object size = request.getParameter("size");
+        
+        
+        StaffQuery staff=new StaffQuery();
+        
+        if (staff_type != null)
+        	staff.setStaffType(Integer.valueOf(staff_type.toString()));
+        if (lan_id != null)
+        	staff.setLanId(Integer.valueOf(lan_id.toString()));
+        if (staff_code != null)
+        	staff.setStaffCode(staff_code.toString());
+        if (Staff_name != null)
+        {
+        	staff.setStaffName("%"+Staff_name.toString()+"%");
+        	//System.out.println("%"+Staff_name.toString()+"%");
+        }
+        
+        if (pageNum != null)
+        	staff.setPageNo(Integer.valueOf(pageNum.toString()));
+        if (size != null)
+        {
+        	staff.setPageSize(Integer.valueOf(size.toString()));
+        }
+          
+        return staffService.query(staff);
     }
     
 }
