@@ -101,4 +101,10 @@ public class StaffServiceImpl implements StaffService {
 
 	}
 
+	@Override
+	public int insertSelective(Staff record) {
+		// TODO 自动生成的方法存根
+		return staffmapper.insertSelective(record);
+	}
+
 }

@@ -210,6 +210,67 @@ public class StaffController extends BaseController{
         return T;
     }
     
+    
+    
+    
+    /*添加用户信息，
+     * 入参:用户主键id、性别sex、电话phonenbr【电话和性别选填】等等
+     * 出参：null 代表没添加成功，Staff 代表添加成功
+
+    */
+    @RequestMapping("/AddStaff")
+    @ResponseBody
+    @CrossOrigin
+    public Staff AddStaff(HttpServletRequest request) {
+    	System.out.println("--------------------------------");
+        System.out.println("StaffController：AddStaff");
+        Object Staff_code= request.getParameter("staff_code");
+        Object Pass_word = request.getParameter("pass_word");
+        Object Email = request.getParameter("attr_value_1");
+        Object Staff_name = request.getParameter("staff_name");
+        Object Phone_Nbr = request.getParameter("phone_nbr");
+        Object sex = request.getParameter("sex");
+        Object channel_id = request.getParameter("channel_id");
+        Object lan_id = request.getParameter("lan_id");
+        Object age = request.getParameter("age");
+        Staff staff=new Staff();
+        if (Staff_code == null || Pass_word  == null || Staff_name == null || channel_id == null || sex == null || lan_id == null )
+        {
+        	System.out.println("必填字段不能为空");
+        	return null;
+        }
+        else {
+        	
+        	if (Staff_code!=null)
+				staff.setStaffCode(Staff_code.toString());
+        	if (Pass_word!=null)
+				staff.setPassWord(MD5Utils.md5Password(Pass_word.toString()));
+        	if (Staff_name!=null)
+				staff.setStaffName(Staff_name.toString());
+        	
+			if (Email!=null)
+				staff.setAttrValue1(Email.toString());
+			if (Phone_Nbr!=null)
+				staff.setPhoneNbr(Phone_Nbr.toString());
+			if (sex!=null)
+				staff.setSex(Integer.valueOf(sex.toString()));
+			if (age!=null)
+				staff.setAge(Integer.valueOf(age.toString()));
+			if (lan_id!=null)
+				staff.setLanId(Integer.valueOf(lan_id.toString()));
+			if (channel_id!=null)
+				staff.setChannelId(Integer.valueOf(channel_id.toString()));
+			
+			staff.setStaffType(1);
+		}
+        System.out.println(staff.toString());
+        
+        staffService.insertSelective(staff);
+        
+        return staff;
+
+    }
+    
     /*用户搜索功能
      * 入参：staff_code、Staff_name、lan_id、staff_type
      * 出参：根据判断条件搜索出符合的用户

@@ -16,4 +16,5 @@ public interface StaffService {
 	int updateByPrimaryKey(Staff staff);
 	public List<Staff> QueryByStaff(Staff record);
 	public PagedData<Staff> query(StaffQuery query);
+	int insertSelective(Staff record);
 }

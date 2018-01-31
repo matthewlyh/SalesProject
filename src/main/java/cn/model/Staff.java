@@ -134,4 +134,15 @@ public class Staff implements Serializable {
     public void setAttrValue3(String attrValue3) {
         this.attrValue3 = attrValue3 == null ? null : attrValue3.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Staff [staffId=" + staffId + ", staffCode=" + staffCode
+				+ ", staffName=" + staffName + ", passWord=" + passWord
+				+ ", channelId=" + channelId + ", sex=" + sex + ", age=" + age
+				+ ", lanId=" + lanId + ", phoneNbr=" + phoneNbr
+				+ ", staffType=" + staffType + ", attrValue1=" + attrValue1
+				+ ", attrValue2=" + attrValue2 + ", attrValue3=" + attrValue3
+				+ "]";
+	}
 }
